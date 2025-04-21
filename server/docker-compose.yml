@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  sentinal-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentinal-api
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - sentinal-network
+
+networks:
+  sentinal-network:
+    driver: bridge

@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "updated_at": "2023-06-01T12:00:00Z",
+  "sensitiveCategories": [
+    "harmful",
+    "profanity",
+    "sensitive",
+    "hate_speech",
+    "violence",
+    "sexual",
+    "harassment"
+  ],
+  "thresholds": {
+    "harmful": 0.5,
+    "profanity": 0.6,
+    "sensitive": 0.5,
+    "hate_speech": 0.4,
+    "violence": 0.5,
+    "sexual": 0.5,
+    "harassment": 0.5
+  },
+  "rules": [
+    "Content with a risk score above 0.7 should be rejected",
+    "Content with a risk score between 0.3 and 0.7 should be reviewed",
+    "Content with a risk score below 0.3 can be approved automatically",
+    "Any content explicitly mentioning self-harm should be escalated",
+    "Profanity in educational contexts may be acceptable"
+  ]
+}

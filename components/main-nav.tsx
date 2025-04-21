@@ -27,6 +27,7 @@ export default function MainNav() {
     { name: "About", href: "/about" },
     { name: "Solutions", href: "/solutions" },
     { name: "Resources", href: "/resources" },
+    { name: "Demo", href: "/demo" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
     { name: "Dashboard", href: "/dashboard" },

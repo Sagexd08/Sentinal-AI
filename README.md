@@ -14,100 +14,111 @@ Built for developers, content managers, and security professionals, SentinelAI p
 
 ## Key Features
 
-- **LSTM-Powered Vulnerability Detection**: Advanced neural networks analyze code for security vulnerabilities with exceptional accuracy
-- **Custom AI Agent**: Intelligent agent performs deep scans of websites for security vulnerabilities
+- **AI Agent Hub**: Orchestrated AI agents for intelligent content analysis
 - **Content Moderation**: Automatically detect and flag harmful content across text, images, and other media
-- **Real-time Notifications**: Stay informed with WebSocket-powered real-time notifications
+- **Adaptive Policies**: Self-improving moderation rules based on feedback
+- **Real-time Analysis**: Immediate content assessment with detailed risk scoring
+- **Supabase Integration**: Secure and scalable data storage
 
 ## Technology Stack
 
 - **Frontend**: Next.js, React, Tailwind CSS, TypeScript
 - **Backend**: Node.js, Express, Supabase
-- **AI & ML**: PyTorch, Python, scikit-learn
+- **AI & ML**: LangChain.js, Google Gemini API
 - **DevOps**: GitHub Actions, Vercel
 
 ## Installation & Setup
 
 ### Prerequisites
 
-- Node.js 18+
-- Python 3.10+
+- Node.js 20.17.0 or higher
 - npm or yarn
 
 ### Quick Start
 
 1. **Clone the repository**
    ```
-   git clone https://github.com/Sagexd08/SentinelAI.git
-   cd SentinelAI
+   git clone https://github.com/yourusername/sentinal-ai.git
+   cd sentinal-ai
    ```
 
 2. **Install dependencies**
    ```
-   # Install all dependencies with a single command
-   npm run install:all
-   
-   # Or install dependencies separately
    # Install frontend dependencies
-   cd frontend
-   npm install --legacy-peer-deps
-   
-   # Install backend dependencies
-   cd ../backend
    npm install
-   
-   # Install Python dependencies
-   pip install -r ai/requirements.txt
+
+   # Install backend dependencies
+   cd server
+   npm install
+   cd ..
    ```
 
 3. **Set up environment variables**
-   Create `.env` files in both frontend and backend directories based on the provided examples.
+
+   **Frontend (.env.local)**:
+   ```
+   NEXT_PUBLIC_API_URL=http://localhost:3001
+   ```
+
+   **Backend (server/.env)**:
+   ```
+   PORT=3001
+   NODE_ENV=development
+   SUPABASE_URL=https://fkuzdgnidoiksdrulcav.supabase.co
+   SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.…By7oKv0Am0
+   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.…tB0A6dOY
+   JWT_SECRET=GY8TqtKsQdAh87vyRXxwt/KKeggVTAMg5Se7NpmL0A3X8A3NZIqUy1V5VtoKKSj4I/UIXAkmogZqJJ6cYG46rg==
+   GEMINI_API_KEY=AIzaSyD6F_MBHqrf-TDdzzbuOt7ZYI6ROP-dL5s
+   ```
 
 4. **Start the development servers**
    ```
-   # Option 1: Start both servers with a single command
-   npm run dev:vscode
-   
-   # Option 2: Start servers separately
-   # Start backend
-   npm run dev:backend
-   
-   # Start frontend (in a new terminal)
-   npm run dev:frontend
+   # Run both frontend and backend concurrently
+   npm run dev:all
+
+   # Or run them separately
+   # Frontend
+   npm run dev
+
+   # Backend
+   npm run dev:server
    ```
 
 5. **Access the application**
-   Open your browser and navigate to `http://localhost:3000`
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:3001
+   - Demo page: http://localhost:3000/demo
 
-### Deployment to Vercel
+### Deployment
 
-1. **Deploy the frontend**
+#### Backend Deployment
+
+1. **Build the Docker image**:
    ```
-   # Run the frontend deployment script
-   ./deploy-frontend.ps1
-   
-   # Or manually deploy
-   cd frontend
-   npm install --legacy-peer-deps
-   npm run build
-   npx vercel --prod
+   cd server
+   docker build -t sentinal-ai-backend .
    ```
 
-2. **Deploy the backend**
+2. **Run the container**:
    ```
-   # Run the backend deployment script
-   ./deploy-backend.ps1
-   
-   # Or manually deploy
-   cd backend
-   npm install
-   npx vercel --prod
+   docker run -p 3001:3001 --env-file .env sentinal-ai-backend
    ```
 
-3. **Access the deployed application**
-   Once deployed, your application will be available at:
-   - Frontend: `https://sentinelai.vercel.app`
-   - Backend: `https://sentinelai-api.vercel.app`
+   Or use docker-compose:
+   ```
+   cd server
+   docker-compose up
+   ```
+
+#### Frontend Deployment
+
+Deploy to Vercel:
+```
+vercel
+```
+
+#### Access the deployed application
+Once deployed, your application will be available at the URLs provided by your deployment platform.
 
 ## License
 
