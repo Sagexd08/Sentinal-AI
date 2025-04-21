@@ -22,9 +22,7 @@ const nextConfig = {
   // Disable source maps in production
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
-  reactStrictMode: false,
-  // Disable swcMinify for better compatibility
-  swcMinify: false
+  reactStrictMode: false
 }
 
 export default nextConfig

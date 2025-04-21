@@ -6,6 +6,17 @@
   "env": {
     "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app"
   },
+  "headers": [
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "routes": [
     { "src": "/about", "dest": "/about" },
     { "src": "/blog", "dest": "/blog" },
