@@ -4,11 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { LucideArrowLeft, Github } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { useAuth } from "@/components/auth-provider"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
+import { Separator } from "../../components/ui/separator"
+import { useAuth } from "../../components/auth-provider"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -50,7 +50,7 @@ export default function SignInPage() {
       if (provider === 'google') setGoogleLoading(true)
       if (provider === 'github') setGithubLoading(true)
       setError("")
-      
+
       const result = await signIn(provider)
       if (result?.error) {
         throw new Error(result.error)
@@ -122,8 +122,8 @@ export default function SignInPage() {
       <Separator className="my-6" />
 
       <div className="mt-6 space-y-3">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           className="w-full border-gray-700 text-gray-300 hover:bg-gray-800"
           onClick={() => handleSocialSignIn('google')}
           disabled={googleLoading || githubLoading}
@@ -148,9 +148,9 @@ export default function SignInPage() {
           </svg>
           {googleLoading ? "Signing in..." : "Continue with Google"}
         </Button>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           className="w-full border-gray-700 text-gray-300 hover:bg-gray-800"
           onClick={() => handleSocialSignIn('github')}
           disabled={googleLoading || githubLoading}
