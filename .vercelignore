@@ -1,0 +1,4 @@
+# Ignore server directory for frontend deployment
+server/
+README.md
+setup-instructions.md
