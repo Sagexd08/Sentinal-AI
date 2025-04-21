@@ -17,12 +17,12 @@
       ]
     }
   ],
-  "routes": [
-    { "src": "/about", "dest": "/about" },
-    { "src": "/blog", "dest": "/blog" },
-    { "src": "/contact", "dest": "/contact" },
-    { "src": "/resources", "dest": "/resources" },
-    { "src": "/solutions", "dest": "/solutions" },
-    { "src": "/(.*)", "dest": "/" }
+  "rewrites": [
+    { "source": "/about", "destination": "/about" },
+    { "source": "/blog", "destination": "/blog" },
+    { "source": "/contact", "destination": "/contact" },
+    { "source": "/resources", "destination": "/resources" },
+    { "source": "/solutions", "destination": "/solutions" },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
