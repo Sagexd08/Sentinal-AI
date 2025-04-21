@@ -9,8 +9,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Disable experimental features that might cause issues
-  experimental: {},
   // Ensure environment variables are properly loaded
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
@@ -22,17 +20,7 @@ const nextConfig = {
   // Disable source maps in production
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
-  reactStrictMode: false,
-  // Transpile modules
-  transpilePackages: [],
-  // Disable type checking during build
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  // Disable ESLint during build
-  eslint: {
-    ignoreDuringBuilds: true,
-  }
+  reactStrictMode: false
 }
 
 export default nextConfig
