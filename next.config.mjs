@@ -9,17 +9,22 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Add experimental features to fix build issues
-  experimental: {
-    // Optimize CSS
-    optimizeCss: true
-  },
-  // External packages for server components
-  serverExternalPackages: [],
+  // Disable experimental features that might cause issues
+  experimental: {},
   // Ensure environment variables are properly loaded
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
-  }
+  },
+  // Disable static optimization for problematic routes
+  staticPageGenerationTimeout: 180,
+  // Configure output for better compatibility
+  output: 'standalone',
+  // Disable source maps in production
+  productionBrowserSourceMaps: false,
+  // Disable strict mode for compatibility
+  reactStrictMode: false,
+  // Disable swcMinify for better compatibility
+  swcMinify: false
 }
 
 export default nextConfig

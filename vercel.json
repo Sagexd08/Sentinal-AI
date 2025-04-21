@@ -1,10 +1,17 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
   "framework": "nextjs",
   "outputDirectory": ".next",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app"
-  }
+  },
+  "routes": [
+    { "src": "/about", "dest": "/about" },
+    { "src": "/blog", "dest": "/blog" },
+    { "src": "/contact", "dest": "/contact" },
+    { "src": "/resources", "dest": "/resources" },
+    { "src": "/solutions", "dest": "/solutions" },
+    { "src": "/(.*)", "dest": "/" }
+  ]
 }
