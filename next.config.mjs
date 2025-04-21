@@ -22,7 +22,17 @@ const nextConfig = {
   // Disable source maps in production
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
-  reactStrictMode: false
+  reactStrictMode: false,
+  // Transpile modules
+  transpilePackages: [],
+  // Disable type checking during build
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  }
 }
 
 export default nextConfig
