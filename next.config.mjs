@@ -5,6 +5,7 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+    tsconfigPath: './tsconfig.json'
   },
   images: {
     unoptimized: true,
@@ -18,7 +19,13 @@ const nextConfig = {
   // Disable strict mode for compatibility
   reactStrictMode: false,
   // Configure SWC for better compatibility
-  swcMinify: true
+  swcMinify: true,
+  // Disable type checking during build
+  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
+  // Increase memory limit
+  experimental: {
+    esmExternals: 'loose'
+  }
 }
 
 export default nextConfig
