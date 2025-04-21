@@ -13,7 +13,7 @@ import { useAuth } from "@/components/auth-provider"
 
 export default function SignUpPage() {
   const router = useRouter()
-  const { signUp } = useAuth()
+  const { signUp, signIn } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
@@ -44,6 +44,12 @@ export default function SignUpPage() {
     setIsLoading(true)
     setError("")
 
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long")
+      setIsLoading(false)
+      return
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match")
       setIsLoading(false)
@@ -58,9 +64,25 @@ export default function SignUpPage() {
 
     try {
       await signUp(formData.name, formData.email, formData.password)
-      router.push("/dashboard")
+      // Only attempt sign in if sign up was successful
+      try {
+        await signIn(formData.email, formData.password)
+        router.push("/dashboard")
+      } catch (signInErr) {
+        // If sign in fails after successful signup, show a different message
+        setError("Account created! Please try signing in.")
+        router.push("/sign-in")
+      }
     } catch (err) {
-      setError("Failed to create account. Please try again.")
+      if (err.message?.includes("email-already-in-use")) {
+        setError("This email is already registered. Please sign in instead.")
+      } else if (err.message?.includes("invalid-email")) {
+        setError("Please enter a valid email address.")
+      } else if (err.message?.includes("weak-password")) {
+        setError("Password is too weak. Please use a stronger password.")
+      } else {
+        setError("Failed to create account. Please try again later.")
+      }
     } finally {
       setIsLoading(false)
     }

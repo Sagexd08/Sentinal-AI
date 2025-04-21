@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { AuthProvider } from "@/components/auth-provider"
+import { headers } from 'next/headers'
+import { SessionProvider } from "next-auth/react"
+import ClientAuthProvider from "@/components/client-auth-provider"
+import { Providers } from '@/components/Providers';
+import AuthSessionProvider from "@/components/auth-session-provider"
 
 export const metadata: Metadata = {
   title: 'SentinelAI',
@@ -10,16 +14,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <AuthSessionProvider>{children}</AuthSessionProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
@@ -19,8 +20,25 @@ import {
 import { useAuth } from "@/components/auth-provider"
 
 export default function DashboardPage() {
-  const { user } = useAuth()
+  const router = useRouter()
+  const { user, signOut } = useAuth()
   const [activeTab, setActiveTab] = useState("overview")
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/sign-in")
+    }
+  }, [user, router])
+
+  // If no user, show nothing while redirecting
+  if (!user) {
+    return null
+  }
+
+  const handleLogout = () => {
+    signOut()
+    router.push("/sign-in")
+  }
 
   return (
     <div className="space-y-6 p-6 max-w-7xl mx-auto">
@@ -37,9 +55,18 @@ export default function DashboardPage() {
             <p className="text-gray-400 mt-1 text-lg">Welcome back, {user?.name || "User"}</p>
           </div>
         </div>
-        <Button className="rounded-full px-6 bg-indigo-600 hover:bg-indigo-700 flex items-center gap-2 shadow-lg shadow-indigo-900/20">
-          <Download className="h-4 w-4" /> Generate Report
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button className="rounded-full px-6 bg-indigo-600 hover:bg-indigo-700 flex items-center gap-2 shadow-lg shadow-indigo-900/20">
+            <Download className="h-4 w-4" /> Generate Report
+          </Button>
+          <Button 
+            variant="outline" 
+            className="rounded-full px-6 border-gray-700 text-gray-400 hover:bg-gray-800/80"
+            onClick={handleLogout}
+          >
+            Sign Out
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab} className="space-y-6">

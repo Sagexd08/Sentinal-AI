@@ -1,93 +1,73 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-interface User {
-  id: string
-  name: string
-  email: string
-  role: string
-}
+export const AuthContext = createContext<{
+  user: any;
+  signOut: () => void;
+  signIn: () => void;
+}>({
+  user: null,
+  signOut: () => {},
+  signIn: () => {}
+})
 
-interface AuthContextType {
-  user: User | null
-  isLoading: boolean
-  signIn: (email: string, password: string) => Promise<User>
-  signUp: (name: string, email: string, password: string) => Promise<User>
-  signOut: () => void
-}
-
-const AuthContext = createContext<AuthContextType | null>(null)
-
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Check if user is already logged in
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    }
-    setIsLoading(false)
+    setMounted(true)
   }, [])
 
-  const signIn = async (email: string, password: string): Promise<User> => {
-    // This is a mock authentication
-    // In a real app, you would call your authentication API
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (email && password) {
-          const user = {
-            id: "user_123",
-            name: email.split("@")[0],
-            email,
-            role: "admin",
-          }
-          localStorage.setItem("user", JSON.stringify(user))
-          setUser(user)
-          resolve(user)
-        } else {
-          reject(new Error("Invalid credentials"))
-        }
-      }, 1000)
-    })
+  useEffect(() => {
+    if (mounted && status === "unauthenticated") {
+      if (window.location.pathname !== "/sign-in") {
+        router.push("/sign-in")
+      }
+    }
+    if (mounted && status === "authenticated") {
+      if (window.location.pathname === "/sign-in") {
+        router.push("/dashboard")
+      }
+    }
+  }, [status, router, mounted])
+
+  // Don't render anything until the component is mounted
+  if (!mounted) return null;
+
+  const value = {
+    user: session?.user || null,
+    signOut: () => signOut({ 
+      callbackUrl: "/sign-in",
+      redirect: true 
+    }),
+    signIn: async () => {
+      try {
+        await signIn("google", {
+          callbackUrl: "/dashboard",
+          redirect: true,
+        })
+      } catch (error) {
+        console.error("Sign in error:", error)
+      }
+    }
   }
 
-  const signUp = async (name: string, email: string, password: string): Promise<User> => {
-    // This is a mock registration
-    // In a real app, you would call your registration API
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (name && email && password) {
-          const user = {
-            id: "user_" + Math.random().toString(36).substring(2, 15),
-            name,
-            email,
-            role: "user",
-          }
-          localStorage.setItem("user", JSON.stringify(user))
-          setUser(user)
-          resolve(user)
-        } else {
-          reject(new Error("Invalid registration details"))
-        }
-      }, 1000)
-    })
-  }
-
-  const signOut = () => {
-    localStorage.removeItem("user")
-    setUser(null)
-  }
-
-  return <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export const useAuth = (): AuthContextType => {
+export const useAuth = () => {
   const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider")
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider')
   }
   return context
 }
