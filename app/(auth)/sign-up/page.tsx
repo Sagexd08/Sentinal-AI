@@ -4,12 +4,12 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { LucideArrowLeft } from "lucide-react"
-import { Button } from "../../../components/ui/button.js"
-import { Input } from "../../../components/ui/input.js"
-import { Label } from "../../../components/ui/label.js"
-import { Separator } from "../../../components/ui/separator.js"
-import { Checkbox } from "../../../components/ui/checkbox.js"
-import { useAuth } from "../../../components/auth-provider.js"
+import { Button } from "../../../components/ui/button"
+import { Input } from "../../../components/ui/input"
+import { Label } from "../../../components/ui/label"
+import { Separator } from "../../../components/ui/separator"
+import { Checkbox } from "../../../components/ui/checkbox"
+import { useAuth } from "../../../components/auth-provider"
 
 export default function SignUpPage() {
   const router = useRouter()
