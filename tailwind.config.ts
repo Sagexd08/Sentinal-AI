@@ -19,7 +19,7 @@ const config = {
       },
     },
     fontFamily: {
-      montserrat: ['var(--font-montserrat)', 'sans-serif'],
+      sans: ['Montserrat', 'sans-serif'],
     },
     extend: {
       colors: {
