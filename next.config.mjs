@@ -20,7 +20,13 @@ const nextConfig = {
   // Disable source maps in production
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
-  reactStrictMode: false
+  reactStrictMode: false,
+  // Configure SWC for better compatibility
+  swcMinify: true,
+  experimental: {
+    // Ensure SWC is properly configured
+    forceSwcTransforms: true
+  }
 }
 
 export default nextConfig
