@@ -7,11 +7,13 @@ import { useRouter } from "next/navigation"
 export const AuthContext = createContext<{
   user: any;
   signOut: () => void;
-  signIn: () => void;
+  signIn: (provider: string, credentials?: any) => Promise<any>;
+  isLoading: boolean;
 }>({
   user: null,
   signOut: () => {},
-  signIn: () => {}
+  signIn: () => Promise.resolve({}),
+  isLoading: false
 })
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -41,18 +43,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     user: session?.user || null,
-    signOut: () => signOut({ 
+    isLoading: status === "loading",
+    signOut: () => signOut({
       callbackUrl: "/sign-in",
-      redirect: true 
+      redirect: true
     }),
-    signIn: async () => {
+    signIn: async (provider: string, credentials?: any) => {
       try {
-        await signIn("google", {
+        return await signIn(provider, {
+          ...credentials,
           callbackUrl: "/dashboard",
-          redirect: true,
+          redirect: false,
         })
       } catch (error) {
         console.error("Sign in error:", error)
+        throw error
       }
     }
   }
