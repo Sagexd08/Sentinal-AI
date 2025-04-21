@@ -7,7 +7,7 @@
     "dev:server": "cd server && npm run dev",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "postbuild": "npx next-sitemap --config next-sitemap.config.js || true",
     "start": "next start",
     "lint": "next lint"
   },
@@ -48,6 +48,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
+    "critters": "^0.0.20",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "8.5.1",
     "expo": "latest",
