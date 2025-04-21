@@ -7,6 +7,7 @@
     "dev:server": "cd server && npm run dev",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "build": "next build",
+    "vercel-build": "bash ./vercel-build.sh",
     "postbuild": "npx next-sitemap --config next-sitemap.config.js || true",
     "start": "next start",
     "lint": "next lint"
