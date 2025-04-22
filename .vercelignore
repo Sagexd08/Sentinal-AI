@@ -1,4 +1,4 @@
-# Ignore server directory for frontend deployment
-server/
-README.md
-setup-instructions.md
+# Ignore everything except the index.html and vercel.json
+*
+!index.html
+!vercel.json
