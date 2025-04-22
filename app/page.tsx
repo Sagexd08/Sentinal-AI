@@ -1,150 +1,71 @@
-"use client"
+import { Metadata } from 'next'
 
-import { Suspense, useState, useEffect, useRef } from "react"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls, Stars, Environment } from "@react-three/drei"
-import { LucideChevronDown } from "lucide-react"
-import { ACESFilmicToneMapping, Color } from "three"
-import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
-
-import Navbar from "@/components/navbar"
-import LoadingScreen from "@/components/loading-screen"
-import { Button } from "@/components/ui/button"
-import Hero from "@/components/sections/hero"
-import Features from "@/components/sections/features"
-import HowItWorks from "@/components/sections/how-it-works"
-import Testimonials from "@/components/sections/testimonials"
-import Pricing from "@/components/sections/pricing"
-import FAQ from "@/components/sections/faq"
-import Footer from "@/components/sections/footer"
-import SimpleGlobe from "@/components/3d/simple-globe"
-import ThreeScene from "@/components/3d/three-scene"
+export const metadata: Metadata = {
+  title: 'SentinelAI - Next-Gen Content Moderation',
+  description: 'AI-powered content moderation with transparency and accountability',
+}
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [activeSection, setActiveSection] = useState(0)
-  const heroRef = useRef(null)
-  const featuresRef = useRef(null)
-  const howItWorksRef = useRef(null)
-  const testimonialsRef = useRef(null)
-  const pricingRef = useRef(null)
-  const faqRef = useRef(null)
-
-  const router = useRouter()
-  const pathname = usePathname()
-
-  useEffect(() => {
-    // Simulate loading assets
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100
-      const sections = [
-        { ref: heroRef, id: 0 },
-        { ref: featuresRef, id: 1 },
-        { ref: howItWorksRef, id: 2 },
-        { ref: testimonialsRef, id: 3 },
-        { ref: pricingRef, id: 4 },
-        { ref: faqRef, id: 5 },
-      ]
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i]
-        if (section.ref.current && section.ref.current.offsetTop <= scrollPosition) {
-          setActiveSection(section.id)
-          break
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const sections = [
-    { id: "hero", title: "Home", path: "/" },
-    { id: "features", title: "Features", path: "/features" },
-    { id: "how-it-works", title: "How It Works", path: "/how-it-works" },
-    { id: "testimonials", title: "Testimonials", path: "/testimonials" },
-    { id: "pricing", title: "Pricing", path: "/pricing" },
-    { id: "faq", title: "FAQ", path: "/faq" },
-  ]
-
-  const scrollToSection = (index) => {
-    const sectionRefs = [heroRef, featuresRef, howItWorksRef, testimonialsRef, pricingRef, faqRef]
-    const section = sections[index]
-    if (pathname === "/" && sectionRefs[index].current) {
-      // Scroll behavior for home page
-      const offset = sectionRefs[index].current.offsetTop
-      const headerOffset = 80
-      const elementPosition = offset - headerOffset
-      
-      window.scrollTo({
-        top: elementPosition,
-        behavior: "smooth",
-      })
-    } else {
-      // Navigate to section page
-      router.push(section.path)
-    }
-  }
-
-  if (isLoading) {
-    return <LoadingScreen />
-  }
-
   return (
-    <main className="relative min-h-screen bg-black text-white">
-      <div className="fixed top-0 left-0 w-full h-full z-0">
-        <ThreeScene />
+    <main className="w-full min-h-screen bg-black text-white flex flex-col items-center justify-center p-8">
+      <h1 className="text-4xl font-bold mb-6 text-purple-500">SentinelAI</h1>
+      <h2 className="text-2xl mb-8">Next-Gen Content Moderation</h2>
+
+      <div className="max-w-3xl text-center mb-12">
+        <p className="text-lg mb-4">
+          SentinelAI is a cutting-edge platform that leverages artificial intelligence to detect and prevent digital threats,
+          ensuring the integrity of your online presence.
+        </p>
+        <p className="text-lg">
+          Our system combines advanced machine learning algorithms, blockchain verification, and decentralized governance
+          to create a comprehensive solution for content moderation and digital security.
+        </p>
       </div>
-      <div className="relative z-10">
-        <Navbar activeSection={activeSection} sections={sections} onNavigate={scrollToSection} />
-        <div ref={heroRef} className="relative min-h-screen">
-          <div className="relative">
-            <Hero />
-          </div>
-          
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="bg-transparent border border-purple-500 rounded-full w-12 h-12 text-purple-500 hover:bg-purple-900/20"
-              onClick={() => scrollToSection(1)}
-            >
-              <LucideChevronDown className="h-6 w-6" />
-            </Button>
-          </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="bg-gray-900 p-6 rounded-lg">
+          <h3 className="text-xl font-semibold mb-3 text-purple-400">Content Moderation</h3>
+          <p>Advanced AI algorithms to detect and filter inappropriate content across your digital platforms.</p>
         </div>
 
-        <div ref={featuresRef}>
-          <Features />
+        <div className="bg-gray-900 p-6 rounded-lg">
+          <h3 className="text-xl font-semibold mb-3 text-purple-400">Threat Detection</h3>
+          <p>Real-time monitoring and detection of potential security threats and vulnerabilities.</p>
         </div>
 
-        <div ref={howItWorksRef}>
-          <HowItWorks />
+        <div className="bg-gray-900 p-6 rounded-lg">
+          <h3 className="text-xl font-semibold mb-3 text-purple-400">Analytics Dashboard</h3>
+          <p>Comprehensive analytics and reporting to track and visualize your digital security status.</p>
         </div>
+      </div>
 
-        <div ref={testimonialsRef}>
-          <Testimonials />
-        </div>
+      <div className="flex flex-wrap justify-center gap-6 mb-12">
+        <a
+          href="/demo"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        >
+          Try Demo
+        </a>
+        <a
+          href="/about"
+          className="bg-transparent border border-purple-600 hover:bg-purple-900/20 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        >
+          Learn More
+        </a>
+      </div>
 
-        <div ref={pricingRef}>
-          <Pricing />
-        </div>
-
-        <div ref={faqRef}>
-          <FAQ />
-        </div>
-
-        <Footer />
+      <div className="mt-8 text-center text-gray-400">
+        <p>&copy; 2025 SentinelAI. All rights reserved.</p>
+        <p className="mt-2">
+          <a
+            href="https://github.com/Sagexd08/Sentinal-AI"
+            className="text-purple-400 hover:text-purple-300 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
+        </p>
       </div>
     </main>
   )

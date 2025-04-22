@@ -1,0 +1,35 @@
+# Exclude node modules and build artifacts
+node_modules
+.next
+out
+
+# Exclude version control files
+.git
+.github
+.gitignore
+
+# Exclude development files
+.vscode
+.idea
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Exclude server directory
+server
+
+# Exclude backup files
+app_backup
+
+# Exclude Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Exclude Vercel files
+.vercel
+.vercelignore
+vercel.json
+vercel-build.sh
+vercel-build-simple.sh

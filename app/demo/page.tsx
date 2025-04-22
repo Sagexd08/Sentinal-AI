@@ -1,4 +1,14 @@
-import ContentModerationForm from '@/components/ContentModerationForm';
+import dynamic from 'next/dynamic';
+
+// Use dynamic import with no SSR for the ContentModerationForm component
+const ContentModerationForm = dynamic(() => import('@/components/ContentModerationForm'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-40 bg-gray-100 animate-pulse rounded-lg flex items-center justify-center">
+      <p className="text-gray-500">Loading form...</p>
+    </div>
+  ),
+});
 
 export default function DemoPage() {
   return (
@@ -10,9 +20,9 @@ export default function DemoPage() {
             Try out our AI-powered content moderation system
           </p>
         </div>
-        
+
         <ContentModerationForm />
-        
+
         <div className="bg-gray-50 p-6 rounded-lg">
           <h2 className="text-xl font-semibold mb-4">How It Works</h2>
           <ol className="list-decimal list-inside space-y-2">
@@ -21,7 +31,7 @@ export default function DemoPage() {
             <li>The system provides a risk assessment and recommendation</li>
             <li>Content is stored in our moderation database for further review if needed</li>
           </ol>
-          
+
           <div className="mt-6">
             <h3 className="text-lg font-medium mb-2">Try These Examples:</h3>
             <ul className="list-disc list-inside space-y-1">

@@ -21,10 +21,10 @@ const nextConfig = {
   reactStrictMode: false,
   // Disable powered by header
   poweredByHeader: false,
-  // Enable the app directory
-  experimental: {
-    appDir: true
-  }
+  // Output as standalone for Docker deployment
+  output: 'standalone',
+  // Transpile dependencies that use modern JavaScript features
+  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei']
 }
 
 module.exports = nextConfig
