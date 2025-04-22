@@ -1,4 +1,6 @@
-# Ignore everything except the index.html and vercel.json
-*
-!index.html
-!vercel.json
+# Ignore server directory and node_modules
+server/
+node_modules/
+.git/
+.github/
+.vscode/
