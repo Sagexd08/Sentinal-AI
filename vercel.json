@@ -1,6 +1,7 @@
 {
   "version": 2,
   "buildCommand": "npm run vercel-build",
+  "outputDirectory": "out",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app",
     "NODE_VERSION": "20.17.0"

@@ -17,6 +17,8 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
   reactStrictMode: false,
+  // Use static export for better compatibility with Vercel
+  output: 'export',
   // Disable type checking during build
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
   // Skip TypeScript type checking

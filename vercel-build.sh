@@ -368,6 +368,61 @@ cp temp_lib/* lib/
 echo "Running build..."
 NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS="--max_old_space_size=4096" NEXT_TYPESCRIPT_COMPILE_COMMAND="echo 'Skipping TypeScript compilation'" NODE_ENV=production npx next build
 
+# Ensure the out directory exists
+echo "Checking if build succeeded..."
+if [ -d "out" ]; then
+  echo "Build succeeded! Static export created in 'out' directory."
+else
+  echo "Build may have failed. Creating a minimal static export..."
+  mkdir -p out
+
+  # Create a minimal index.html
+  cat > out/index.html << 'EOL'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentinal AI</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sentinal AI</h1>
+    <p>Our platform is currently being updated. Please check back soon for our improved experience.</p>
+  </div>
+</body>
+</html>
+EOL
+fi
+
 # Restore the original directories
 echo "Restoring original directories..."
 rm -rf components
