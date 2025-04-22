@@ -3,7 +3,6 @@ server/
 .git/
 .github/
 .vscode/
-app/
 app_backup/
 vercel-build.sh
 vercel-build-simple.sh

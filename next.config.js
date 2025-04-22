@@ -20,7 +20,11 @@ const nextConfig = {
   // Disable strict mode for compatibility
   reactStrictMode: false,
   // Disable powered by header
-  poweredByHeader: false
+  poweredByHeader: false,
+  // Enable the app directory
+  experimental: {
+    appDir: true
+  }
 }
 
 module.exports = nextConfig
