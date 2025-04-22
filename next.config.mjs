@@ -18,14 +18,8 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
   reactStrictMode: false,
-  // Configure SWC for better compatibility
-  swcMinify: true,
   // Disable type checking during build
-  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  // Increase memory limit
-  experimental: {
-    esmExternals: 'loose'
-  }
+  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei']
 }
 
 export default nextConfig

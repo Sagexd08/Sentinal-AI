@@ -1,0 +1,19 @@
+import React from 'react';
+
+export default function ThreeScene() {
+  return (
+    <div className="w-full h-full">
+      <div className="text-center">
+        <p>3D visualization loading...</p>
+      </div>
+    </div>
+  );
+}
+
+export const SimpleGlobe = () => null;
+export const AIDetection = () => null;
+export const BlockchainLayer = () => null;
+export const DaoGovernance = () => null;
+export const JoinMovement = () => null;
+export const LearningLoop = () => null;
+export const ModularArchitecture = () => null;
