@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "bash ./build.sh",
     "dev:server": "cd server && npm run dev",
-    "dev:all": "concurrently \"pnpm run dev\" \"pnpm run dev:server\"",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "postbuild": "npx next-sitemap --config next-sitemap.config.js || true",
     "start": "next start",
     "lint": "next lint"

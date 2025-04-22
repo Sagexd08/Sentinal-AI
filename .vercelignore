@@ -5,8 +5,4 @@ server/
 .vscode/
 vercel-build.sh
 vercel-build-simple.sh
-
-# Make sure these files are included
-!build.sh
-!next.config.js
-!pages/
+pnpm-lock.yaml
