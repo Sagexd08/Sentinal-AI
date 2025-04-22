@@ -1,6 +1,7 @@
-# Ignore server directory and node_modules
+# Ignore server directory and unnecessary files
 server/
-node_modules/
 .git/
 .github/
 .vscode/
+vercel-build.sh
+vercel-build-simple.sh
