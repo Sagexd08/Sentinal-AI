@@ -19,10 +19,6 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   // Disable strict mode for compatibility
   reactStrictMode: false,
-  // Disable type checking during build
-  transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  // Disable trailing slash
-  trailingSlash: false,
   // Disable powered by header
   poweredByHeader: false
 }
