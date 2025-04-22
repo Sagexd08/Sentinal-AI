@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sentinal-ai.vercel.app
+
+# Sitemaps
+Sitemap: https://sentinal-ai.vercel.app/sitemap.xml
+Sitemap: https://sentinal-ai.vercel.app/server-sitemap.xml

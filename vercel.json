@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "framework": "nextjs",
   "buildCommand": "npm run vercel-build",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app",
