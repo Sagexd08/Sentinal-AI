@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "mkdir -p out && cp -r static/* out/",
-  "outputDirectory": "out",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app",
-    "NODE_VERSION": "20.17.0"
-  }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "public": true,
+  "buildCommand": "echo 'No build step'"
 }
