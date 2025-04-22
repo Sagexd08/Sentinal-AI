@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run vercel-build",
+  "buildCommand": "mkdir -p out && cp -r static/* out/",
   "outputDirectory": "out",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app",
