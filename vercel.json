@@ -2,17 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "next.config.js",
-      "use": "@vercel/next"
+      "src": "backend/src/index.js",
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/backend/src/index.js"
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://sentinal-ai-backend.vercel.app"
+    "NODE_ENV": "production",
+    "PORT": "3001",
+    "SUPABASE_URL": "${SUPABASE_URL}",
+    "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
+    "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}",
+    "JWT_SECRET": "${JWT_SECRET}"
   }
 }

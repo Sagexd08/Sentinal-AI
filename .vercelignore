@@ -1,9 +1,23 @@
-# Ignore server directory and unnecessary files
-server/
-.git/
-.github/
-.vscode/
-app_backup/
-vercel-build.sh
-vercel-build-simple.sh
-pnpm-lock.yaml
+# Ignore everything in the root except the backend directory
+/*
+!/backend
+!/vercel.json
+!/package.json
+
+# Ignore node_modules in the backend directory
+/backend/node_modules
+
+# Ignore test files
+/backend/tests
+
+# Ignore logs
+/backend/logs
+
+# Ignore environment files
+/backend/.env
+/backend/.env.local
+/backend/.env.development
+/backend/.env.production
+
+# Ignore the Sentinal-Ai directory (frontend)
+/Sentinal-Ai
