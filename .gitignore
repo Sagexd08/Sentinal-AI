@@ -4,9 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+/server/node_modules
 
 # testing
 /coverage
+/server/coverage
 
 # next.js
 /.next/
@@ -14,6 +16,11 @@
 
 # production
 /build
+/server/build
+
+# logs
+/server/logs
+/logs
 
 # misc
 .DS_Store
@@ -30,6 +37,7 @@ yarn-error.log*
 .env
 .env.development
 .env.production
+/server/.env
 
 # vercel
 .vercel

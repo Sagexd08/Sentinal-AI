@@ -268,7 +268,7 @@ Our continuous improvement cycle:
 ### Prerequisites
 
 - Node.js (v20.17.0 or higher)
-- npm or pnpm
+- npm or yarn
 - Git
 
 ### Installation
@@ -278,15 +278,18 @@ Our continuous improvement cycle:
 git clone https://github.com/Sagexd08/Sentinal-AI.git
 cd Sentinal-AI
 
-# Install dependencies
-pnpm install
+# Install dependencies with legacy peer deps flag
+npm install --legacy-peer-deps
+
+# Install server dependencies
+cd server && npm install && cd ..
 
 # Set up environment variables
 cp .env.example .env.local
 # Edit .env.local with your configuration
 
 # Run the development server
-pnpm dev
+npm run dev
 ```
 
 ### Environment Setup
@@ -300,6 +303,32 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 NEXTAUTH_SECRET=your-nextauth-secret
 NEXTAUTH_URL=http://localhost:3000
 ```
+
+### Deployment
+
+#### Vercel Deployment
+
+1. Fork this repository to your GitHub account
+2. Create a new project in Vercel and import your forked repository
+3. Configure the following environment variables in Vercel:
+   - `NEXT_PUBLIC_API_URL`: URL of your backend API
+   - `NODE_VERSION`: 20.17.0
+   - Other environment variables as needed
+4. Deploy the project
+
+#### Backend Deployment
+
+1. Create a new project in Vercel for the backend
+2. Set the root directory to `server`
+3. Configure the following environment variables:
+   - `NODE_ENV`: production
+   - `PORT`: 3001
+   - `SUPABASE_URL`: Your Supabase URL
+   - `SUPABASE_ANON_KEY`: Your Supabase anonymous key
+   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
+   - `JWT_SECRET`: Secret for JWT token generation
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+4. Deploy the backend project
 
 ## 📈 Development Roadmap
 
